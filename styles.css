@@ -1,0 +1,1577 @@
+/* Base styles */
+:root {
+    --primary-color: #ff5252;
+    --secondary-color: #7c4dff;
+    --accent-color: #00b0ff;
+    --tertiary-color: #64dd17;
+    --light-bg: #f5f7fa;
+    --dark-bg: #000000;
+    --text-light: #f5f5f7;
+    --text-dark: #333;
+    --code-bg: #1e1e1e;
+    --code-bg-light: #282c34;
+    --code-comment: #6a9955;
+    --code-keyword: #569cd6;
+    --code-string: #ce9178;
+    --code-number: #b5cea8;
+    --code-function: #dcdcaa;
+    --code-class: #4ec9b0;
+    --code-variable: #9cdcfe;
+    --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    --font-apple: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-code: 'SF Mono', 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.08);
+    --shadow-medium: 0 15px 35px rgba(0, 0, 0, 0.1);
+    --shadow-strong: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-apple);
+    background-color: var(--light-bg);
+    color: var(--text-dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.home-page {
+    display: flex;
+    flex-direction: column;
+    background:  linear-gradient(135deg, #f5f7fa, #e8eaf6);
+}
+
+/* Header */
+.main-header {
+    background-color: rgb(232 169 169 / 56%);
+    backdrop-filter: blur(17px);
+    -webkit-backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 15px;
+    margin: 20px 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.main-header.scrolled {
+    background-color: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+.logo i {
+    color: var(--primary-color);
+    margin-right: 0.5rem;
+    font-size: 1.8rem;
+}
+
+.main-nav ul {
+    display: flex;
+    list-style: none;
+}
+
+.main-nav li {
+    margin: 0 1.2rem;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: var(--transition-smooth);
+    font-size: 0.95rem;
+}
+
+.main-nav a:hover, .main-nav a.active {
+    color: var(--primary-color);
+}
+
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: var(--transition-smooth);
+}
+
+.main-nav a:hover::after, .main-nav a.active::after {
+    width: 100%;
+}
+
+.user-actions .btn-login {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 15px; /* Changed from 50px to 15px to match main-header */
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition-smooth);
+    font-size: 0.95rem;
+    border: none;
+}
+
+.user-actions .btn-login:hover {
+    background-color: #e53935;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(255, 82, 82, 0.4);
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5% 10%;
+    min-height: 80vh;
+    background: linear-gradient(135deg, #f5f7fa, #e8eaf6);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(1px 1px at 25% 15%, rgba(255, 255, 255, 0.9), transparent),
+        radial-gradient(1px 1px at 50% 40%, rgba(255, 255, 255, 0.7), transparent),
+        radial-gradient(2px 2px at 15% 25%, rgba(255, 255, 255, 0.8), transparent),
+        radial-gradient(2px 2px at 75% 5%, rgba(255, 255, 255, 0.7), transparent),
+        radial-gradient(1px 1px at 85% 30%, rgba(255, 255, 255, 0.9), transparent),
+        radial-gradient(1.5px 1.5px at 10% 70%, rgba(255, 255, 255, 0.8), transparent),
+        radial-gradient(1px 1px at 35% 85%, rgba(255, 255, 255, 0.9), transparent),
+        radial-gradient(1.5px 1.5px at 65% 60%, rgba(255, 255, 255, 0.8), transparent),
+        radial-gradient(1px 1px at 90% 80%, rgba(255, 255, 255, 0.9), transparent),
+        radial-gradient(1px 1px at 20% 60%, rgba(255, 255, 255, 0.8), transparent),
+        radial-gradient(1.5px 1.5px at 40% 70%, rgba(255, 255, 255, 0.9), transparent),
+        radial-gradient(2px 2px at 60% 90%, rgba(255, 255, 255, 0.7), transparent);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.hero-content {
+    width: 50%;
+    animation: fadeInLeft 1s ease-out;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-image {
+    width: 40%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+    line-height: 1.2;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    letter-spacing: -1px;
+}
+
+.hero h1 span {
+    color: var(--primary-color);
+    position: relative;
+    display: inline-block;
+}
+
+.hero h1 span::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background-color: rgba(255, 82, 82, 0.2);
+    z-index: -1;
+}
+
+.hero .subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    opacity: 0.85;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), #ff8282);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    box-shadow: 0 5px 15px rgba(255, 82, 82, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    letter-spacing: 0.5px;
+    border: none;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 82, 82, 0.4);
+}
+
+/* Orbit Animation */
+.orbit {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: rotate 60s linear infinite;
+}
+
+/* Earth-like planet */
+.planet {
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle at 30% 30%, 
+        #0a2e52 0%, 
+        #0d4377 20%, 
+        #0a5aa5 40%,
+        #1a74c4 60%,
+        #2a88e0 75%,
+        #3a96f0 90%,
+        #4aa6ff 100%);
+    border-radius: 50%;
+    box-shadow: 
+        0 0 40px rgba(42, 151, 240, 0.5), 
+        inset 0 0 20px rgba(255, 255, 255, 0.4),
+        inset -10px -10px 30px rgba(0, 20, 80, 0.5);
+    position: relative;
+    overflow: hidden;
+    animation: float 10s ease-in-out infinite, earthSpin 24s linear infinite;
+}
+
+/* Continents on Earth */
+.planet::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400' viewBox='0 0 800 400'%3E%3Cpath fill='%2334c924' d='M110,50 Q140,30 170,50 T240,60 T300,40 Q340,20 380,40 T430,60 T490,40 Q550,20 600,50 Q630,80 590,110 Q630,140 590,160 T520,170 T440,190 Q400,220 360,190 T300,170 T230,180 Q180,200 140,170 Q100,140 110,100 Z' opacity='1'/%3E%3Cpath fill='%2336d42b' d='M700,180 Q720,160 740,180 Q770,210 730,230 Q700,220 700,180 Z' opacity='1'/%3E%3Cpath fill='%2329ad19' d='M220,250 Q250,230 290,250 T350,260 T420,240 Q470,220 510,240 T580,260 T650,240 Q690,220 720,250 Q740,290 700,320 Q730,350 690,370 T610,380 T520,400 Q470,420 420,400 T340,380 T270,390 Q210,410 160,380 Q120,350 140,310 Q100,280 140,250 Z' opacity='1'/%3E%3C/svg%3E");
+    background-size: 100% 100%;
+    opacity: 0.9;
+    mix-blend-mode: color-dodge;
+    animation: earthRotate 40s linear infinite;
+}
+
+/* Clouds on Earth */
+.planet::after {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='800' viewBox='0 0 800 800'%3E%3Cpath fill='%23ffffff' d='M100,200 Q150,150 200,170 T300,150 T400,170 T500,150 Q550,130 600,170 Q650,210 610,250 Q640,280 600,310 Q650,350 600,380 Q640,420 600,450 T500,470 T400,450 Q350,480 300,450 T200,470 T100,450 Q50,420 80,390 Q30,350 80,320 Q40,290 80,260 Q30,210 100,200 Z' opacity='0.4'/%3E%3Cpath fill='%23ffffff' d='M150,500 Q200,480 240,500 T340,520 T430,500 Q500,480 550,500 T650,520 T730,500 Q770,460 730,430 Q760,390 730,350 Q760,310 730,270 T650,250 T550,230 Q500,200 450,230 T340,250 T240,230 Q190,200 150,230 Q100,270 120,320 Q80,360 120,400 Q70,440 120,480 Z' opacity='0.35'/%3E%3C/svg%3E");
+    background-size: 100% 100%;
+    opacity: 0.5;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    animation: cloudsDrift 60s linear infinite;
+}
+
+/* Earth atmosphere glow */
+.planet-atmosphere {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    box-shadow: 0 0 30px 10px rgba(116, 185, 255, 0.3);
+    z-index: -1;
+    opacity: 0.6;
+}
+
+/* Make shooting stars more visible and improve their positioning */
+.shooting-stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%; /* Extend beyond the container */
+    height: 200%;
+    overflow: visible; /* Allow visibility outside container */
+    z-index: 10; /* Ensure they're above other elements */
+    pointer-events: none;
+}
+
+.shooting-star {
+    position: absolute;
+    width: 150px; /* Wider trail */
+    height: 2px; /* Thicker line for visibility */
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+    border-radius: 50%;
+    filter: drop-shadow(0 0 8px rgba(105, 155, 255, 0.9)); /* Stronger glow */
+    animation: shootingStar 6s ease-in-out infinite;
+    opacity: 0;
+}
+
+/* Position stars around the orbit rather than inside it */
+.shooting-star:nth-child(1) {
+    top: -50px;
+    left: -100px;
+    animation-delay: 0s;
+    transform: rotate(35deg);
+}
+
+.shooting-star:nth-child(2) {
+    top: 50px;
+    left: 250px;
+    animation-delay: 2.5s;
+    transform: rotate(-20deg);
+}
+
+.shooting-star:nth-child(3) {
+    top: 200px;
+    left: -50px;
+    animation-delay: 4.7s;
+    transform: rotate(15deg);
+}
+
+.shooting-star:nth-child(4) {
+    top: 100px;
+    left: 200px;
+    animation-delay: 1.5s;
+    transform: rotate(-45deg);
+}
+
+/* Improve shooting star animation */
+@keyframes shootingStar {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px) translateY(50px) scale(0.5);
+    }
+    5% { 
+        opacity: 1;
+    }
+    25% {
+        opacity: 1;
+        transform: translateX(300px) translateY(-100px) scale(1);
+    }
+    30% { 
+        opacity: 0; 
+    }
+    100% { 
+        opacity: 0;
+        transform: translateX(300px) translateY(-100px) scale(1);
+    }
+}
+
+/* Moon-like satellite */
+.satellite {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle at 45% 40%, 
+        #d1d1d1 0%,
+        #b5b5b5 30%,
+        #909090 70%,
+        #707070 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    animation: orbitSatellite 10s linear infinite;
+    overflow: hidden;
+}
+
+/* Moon craters */
+.satellite::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Ccircle cx='20' cy='30' r='4' fill='%23808080' /%3E%3Ccircle cx='35' cy='15' r='3' fill='%23808080' /%3E%3Ccircle cx='70' cy='30' r='5' fill='%23808080' /%3E%3Ccircle cx='45' cy='50' r='4' fill='%23808080' /%3E%3Ccircle cx='25' cy='60' r='3' fill='%23808080' /%3E%3Ccircle cx='65' cy='70' r='4' fill='%23808080' /%3E%3Ccircle cx='55' cy='20' r='2' fill='%23808080' /%3E%3C/svg%3E");
+    opacity: 0.3;
+}
+
+/* Code Rain effect */
+.code-container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+.code-rain-column {
+    position: absolute;
+    bottom: 0;
+    font-family: var(--font-code);
+    color: var(--primary-color);
+    font-size: 1rem;
+    white-space: nowrap;
+    opacity: 0;
+    animation: code-flow 12s linear infinite;
+    animation-delay: calc(var(--delay, 0) * 2s);
+}
+
+/* Hello World Animation */
+.hello-world-container {
+    background-color: #0d1117;  /* Darker GitHub theme background */
+    border-radius: 10px;
+    padding: 2.5rem 1rem 1rem 1.5rem; 
+    margin-top: 2rem;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    border: 1px solid #30363d; /* GitHub dark theme border color */
+    max-width: 600px;
+    min-height: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    font-family: ui-monospace, SFMono-Regular, 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+}
+
+.hello-world-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2.5rem;
+    background-color: #161b22; /* Slightly lighter than main bg for header */
+    border-bottom: 1px solid #30363d;
+    border-radius: 10px 10px 0 0; /* Match the container's top radius */
+    z-index: 0;
+}
+
+.hello-world-text {
+    font-family: ui-monospace, SFMono-Regular, 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 1.1rem;
+    margin-bottom: 0;
+    margin-top: 1.5rem;
+    margin-left: 2rem; /* Add left margin to accommodate line numbers */
+    line-height: 1.4;
+    color: #e6edf3; /* GitHub dark theme text color */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease-out;
+    position: relative;
+    z-index: 1;
+    padding: 0.2rem 0;
+}
+
+/* GitHub dark theme syntax highlighting colors */
+.token-string { color: #a5d6ff; } /* GitHub dark theme string color */
+.token-keyword { color: #ff7b72; } /* GitHub dark theme keyword color */
+.token-function { color: #d2a8ff; } /* GitHub dark theme function color */
+.token-variable { color: #ffa657; } /* GitHub dark theme variable color */
+.token-comment { color: #8b949e; } /* GitHub dark theme comment color */
+
+.hello-world-text.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hello-world-text.fade-out {
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+.hello-world-text::after {
+    content: '';
+    display: inline-block;
+    width: 2px;
+    height: 1.2em;
+    background-color: #0969da; /* GitHub blue */
+    margin-left: 1px;
+    vertical-align: text-bottom;
+    animation: github-cursor-blink 1.2s step-end infinite;
+}
+
+@keyframes github-cursor-blink {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+.hello-world-language {
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+    background-color: rgba(56, 139, 253, 0.15); /* Blue background */
+    color: #58a6ff; /* Bright blue text color */
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 3;
+}
+
+.github-header {
+    position: absolute;
+    top: 0.75rem;
+    left: 1rem;
+    display: flex;
+    align-items: center;
+    z-index: 2;
+}
+
+.github-header i {
+    color: #58a6ff; /* Bright blue color for header icon */
+    margin-right: 0.5rem;
+    font-size: 1rem;
+}
+
+.github-header span {
+    color: #c9d1d9; /* Brighter white text for better visibility */
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.hello-world-line-numbers {
+    position: absolute;
+    left: 0.5rem;
+    top: 3rem;
+    color: #8b949e; /* GitHub line number color */
+    font-size: 1rem;
+    user-select: none;
+    text-align: right;
+    z-index: 1;
+}
+
+.hello-world-language.visible {
+    opacity: 1;
+}
+
+/* Features Section */
+.features {
+    padding: 5rem 10%;
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.05);
+}
+
+/* Enhanced Feature Cards with Border Animation - With Rounded Corners */
+.feature {
+    width: 30%;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 20px; /* Increased from 10px for more rounded corners */
+    box-shadow: var(--shadow-soft);
+    text-align: center;
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    /* Apply rounded font to feature cards */
+    font-family: "Varela Round", "Nunito", "Quicksand", "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+}
+
+/* Add rounded font styles to all text inside feature cards */
+.feature h3 {
+    font-family: "Varela Round", "Arial Rounded MT Bold", "Helvetica Rounded", sans-serif;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    /* Improve rendering of rounded fonts */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.feature p {
+    font-family: "Quicksand", "Nunito", "Arial Rounded MT Bold", sans-serif;
+    color: #444; /* Darker text for better readability */
+    font-size: 1rem;
+    position: relative;
+    overflow: hidden;
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+}
+
+/* Soften the gradient borders for better readability with more rounded corners */
+.feature::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    z-index: -2;
+    border-radius: 24px; /* Increased from 13px for more rounded corners */
+    background: linear-gradient(90deg, transparent, transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    filter: brightness(0.9) saturate(0.8); /* Reduce color intensity */
+}
+
+/* Soften the Responsive Design (blue) border color */
+.feature:nth-child(1)::after {
+    background: linear-gradient(90deg, rgba(58, 123, 213, 0.7), rgba(109, 213, 237, 0.7), rgba(58, 123, 213, 0.7));
+    background-size: 300% 100%;
+    animation: borderGradient 3s ease infinite paused;
+}
+
+/* Soften the Backend Systems (green) border color */
+.feature:nth-child(2)::after {
+    background: linear-gradient(90deg, rgba(17, 153, 142, 0.7), rgba(56, 239, 125, 0.7), rgba(17, 153, 142, 0.7));
+    background-size: 300% 100%;
+    animation: borderGradient 3s ease infinite paused;
+    animation-delay: 0.2s;
+}
+
+/* Soften the Security First (red) border color */
+.feature:nth-child(3)::after {
+    background: linear-gradient(90deg, rgba(255, 82, 82, 0.7), rgba(255, 145, 112, 0.7), rgba(255, 82, 82, 0.7));
+    background-size: 300% 100%;
+    animation: borderGradient 3s ease infinite paused;
+    animation-delay: 0.4s;
+}
+
+/* Border animation on hover */
+.feature:hover::after {
+    opacity: 1;
+    animation-play-state: running;
+}
+
+.feature:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    border-color: transparent;
+    background-color: #fdfdfd; /* Add subtle background on hover for better text contrast */
+}
+
+/* Add border animation keyframes */
+@keyframes borderGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Add shimmer animation for border highlight */
+@keyframes borderShimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Add glow effect to features on hover */
+.feature:hover i {
+    animation: featureIconPulse 1.5s ease infinite;
+    filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.2));
+}
+
+@keyframes featureIconPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); } /* Smaller scale change */
+    100% { transform: scale(1); }
+}
+
+/* Ensure feature title changes color on hover to match border */
+.feature:nth-child(1):hover h3 { color: #3a6aad; } /* Less intense blue */
+.feature:nth-child(2):hover h3 { color: #108277; } /* Less intense green */
+.feature:nth-child(3):hover h3 { color: #e04545; } /* Less intense red */
+
+/* Improve paragraph text contrast */
+.feature p {
+    color: #444; /* Darker text for better readability */
+    font-size: 1rem;
+    position: relative;
+    overflow: hidden;
+    line-height: 1.6;
+}
+
+/* Make sure icons remain visible but not too harsh */
+.feature i {
+    font-size: 3rem;
+    color: #666; /* Neutral base color */
+    margin-bottom: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.feature:nth-child(1):hover i { color: #3a6aad; } /* Softer blue */
+.feature:nth-child(2):hover i { color: #108277; } /* Softer green */
+.feature:nth-child(3):hover i { color: #e04545; } /* Softer red */
+
+/* Tech Stack Section */
+.tech-stack {
+    padding: 5rem 10%;
+    text-align: center;
+    background-color: #f8f9fa;
+}
+
+.tech-stack h2 {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--text-dark);
+    letter-spacing: -0.5px;
+}
+
+.tech-icons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3rem;
+}
+
+.tech-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: var(--transition-smooth);
+}
+
+.tech-icon i {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    color: #555;
+    transition: var(--transition-smooth);
+}
+
+.tech-icon:hover i {
+    color: var(--primary-color);
+    transform: translateY(-5px);
+}
+
+.tech-icon span {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #555;
+}
+
+/* Testimonials Section */
+.testimonials {
+    padding: 6rem 10%;
+    text-align: center;
+    background: linear-gradient(135deg, #f8f9fa, #e8eaf6);
+}
+
+.testimonials h2 {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--text-dark);
+    letter-spacing: -0.5px;
+}
+
+.testimonial {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: var(--shadow-soft);
+}
+
+.testimonial p {
+    font-size: 1.3rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+    position: relative;
+}
+
+.testimonial p::before, .testimonial p::after {
+    content: '"';
+    font-size: 3rem;
+    color: rgba(255, 82, 82, 0.2);
+    position: absolute;
+}
+
+.testimonial p::before {
+    left: -15px;
+    top: -20px;
+}
+
+.testimonial p::after {
+    right: -15px;
+    bottom: -50px;
+}
+
+.author {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.author-info {
+    text-align: center;
+}
+
+.author-info strong {
+    display: block;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.author-info span {
+    font-size: 0.9rem;
+    color: #777;
+}
+
+/* Footer */
+.main-footer {
+    background: linear-gradient(135deg, #000000, #1a1a1a, #000000);
+    color: #ffffff;
+    padding: 4rem 10%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-radius: 20px 20px 0 0; /* Only round the top corners */
+    position: relative;
+    margin-top: 2rem;
+    margin-bottom: 0; /* Ensure footer touches the bottom */
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.main-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    /* Colorful gradient line across the top of the footer */
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color), var(--tertiary-color));
+    /* Keep line above footer content but below the container */
+    z-index: 1;
+}
+
+/* Footer column - creates 3-column layout for footer content */
+.footer-section {
+    width: 30%; /* Each section takes 30% width for 3-column layout */
+    margin-bottom: 2rem;
+    position: relative;
+    /* Ensure content stays above gradient line and background */
+    z-index: 2;
+}
+
+/* Footer section headings styling */
+.footer-section h4 {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+    font-weight: 600;
+    position: relative;
+    display: inline-block; /* Allows underline to match text width */
+}
+
+/* Decorative underline for section headings */
+.footer-section h4::after {
+    content: '';
+    position: absolute;
+    width: 40%; /* Underline covers 40% of heading width */
+    background: linear-gradient(90deg, var(--primary-color), transparent);
+    bottom: -8px;
+    left: 0;
+}
+
+.footer-section p {
+    margin-bottom: 0.8rem;
+    color: #aaa;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer-section p:hover {
+    color: #fff;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section li {
+    margin-bottom: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.footer-section li:hover {
+    transform: translateX(5px);
+}
+
+.footer-section a {
+    color: #aaa;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+
+.footer-section a:hover {
+    color: var(--primary-color);
+}
+
+.social-icons {
+    display: flex;
+    margin-top: 1.5rem;
+}
+
+.social-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    margin-right: 1rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.social-icons a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.social-icons a:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 5px 15px rgba(255, 82, 82, 0.4);
+}
+
+.social-icons a:hover::before {
+    opacity: 1;
+}
+
+.newsletter-form {
+    display: flex;
+    margin-top: 1rem;
+}
+
+.newsletter-form input {
+    padding: 0.8rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px 0 0 4px;
+    width: 100%;
+    outline: none;
+    font-size: 0.9rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.newsletter-form input:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--primary-color);
+}
+
+.newsletter-form button {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    padding: 0 1.2rem;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.newsletter-form button:hover {
+    transform: translateX(3px);
+    box-shadow: 0 0 15px rgba(var(--primary-color-rgb), 0.5);
+}
+
+/* Footer credit line styling */
+.footer-credit {
+    width: 100%;
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
+    color: #aaa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.footer-credit i {
+    font-size: 0.8rem;
+    animation: heartbeat 1.5s ease infinite;
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.2); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Improved MacOS-style Semester Folder Overlay */
+.semester-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(15px) saturate(180%);
+    -webkit-backdrop-filter: blur(15px) saturate(180%);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.25s cubic-bezier(0.19, 1, 0.22, 1), visibility 0.25s;
+}
+
+.semester-page.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Fix for folder cutoff issues */
+.macos-window {
+    width: 85%;
+    max-width: 900px;
+    height: 85vh; /* Increased height for more visibility */
+    max-height: 750px; /* Increased max height */
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 10px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; /* Ensure proper layout flow */
+    transform: translateY(0);
+    transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    animation: windowAppear 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    padding-bottom: 10px; /* Added padding at bottom */
+}
+
+/* Ensure content doesn't overlap with window border */
+.macos-window-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Contain the scrollable area */
+}
+
+.macos-window-header {
+    background: #e6e6e6;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+.window-controls {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.control {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.control:hover {
+    transform: scale(1.1);
+}
+
+.close {
+    background-color: #ff5f56;
+}
+
+.minimize {
+    background-color: #ffbd2e;
+}
+
+.maximize {
+    background-color: #27c93f;
+}
+
+.window-title {
+    font-size: 13px;
+    color: #666;
+    flex-grow: 1;
+    text-align: center;
+    font-weight: 600;
+}
+
+.back-btn {
+    background: rgba(0, 0, 0, 0.05);
+    color: #333;
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 15px;
+    border-radius: 6px;
+    margin: 15px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.back-btn i {
+    margin-right: 5px;
+    font-size: 12px;
+}
+
+.semesters-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 25px;
+    padding: 30px 30px 80px 30px; /* Much more padding at bottom */
+    overflow-y: auto;
+    max-height: calc(85vh - 110px); /* Adjusted height calculation */
+    margin-bottom: 20px; /* Additional margin */
+}
+
+/* Animation for macOS folder opening */
+@keyframes windowAppear {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.02);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Animation for folder selection */
+@keyframes folderPulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Custom scrollbar for macOS feel */
+.semesters-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.semesters-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.semesters-container::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.semesters-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* Adjust semester container layout */
+.semester {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 10px 30px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    background-color: transparent;
+}
+
+.semester:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+    transform: translateY(-5px);
+}
+
+.semester.selected {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Move number above folder for cleaner look */
+.sem-number {
+    font-weight: 600;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+    z-index: 3;
+}
+
+/* Improve folder styling to include description within folder */
+.folder-icon {
+    position: relative;
+    font-size: 60px;
+    margin-bottom: 20px;
+    color: #f0ad4e;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    width: 100px;
+    height: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.folder-icon i {
+    position: absolute;
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.1));
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+/* Description tag inside folder */
+.sem-desc {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 3px 8px;
+    font-size: 10px;
+    color: #555;
+    text-align: center;
+    white-space: nowrap;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.semester:hover .sem-desc {
+    bottom: -5px;
+    background: white;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15);
+}
+
+.semester:hover .folder-icon {
+    transform: translateY(-5px) scale(1.05);
+}
+
+/* Animation keyframes */
+@keyframes orbitSatellite {
+    0% {
+        transform: rotate(0deg) translateX(170px) rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg) translateX(170px) rotate(-360deg);
+    }
+}
+
+@keyframes rotateGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes spinGlow {
+    0% {
+        transform: rotate(0deg);
+        text-shadow: 0 0 5px rgba(255, 82, 82, 0);
+    }
+    50% {
+        text-shadow: 0 0 15px rgba(255, 82, 82, 0.7);
+    }
+    100% {
+        transform: rotate(360deg);
+        text-shadow: 0 0 5px rgba(255, 82, 82, 0);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 82, 82, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 82, 82, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 82, 82, 0);
+    }
+}
+
+@keyframes pulse-bg {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.1;
+    }
+}
+
+@keyframes floatCode {
+    0% {
+        opacity: 0;
+        transform: translateY(100%) translateX(-50%) rotateX(30deg);
+    }
+    10% {
+        opacity: 0.3;
+    }
+    90% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100%) translateX(50%) rotateX(30deg);
+    }
+}
+
+@keyframes typing {
+    from { width: 0 }
+    30% { width: 100% }
+    70% { width: 100% }
+    90% { width: 0 }
+    to { width: 0 }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--primary-color) }
+}
+
+@keyframes code-flow {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100vh);
+    }
+}
+
+@keyframes rain {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100vh);
+    }
+}
+
+@keyframes colorChange {
+    0% {
+        background: linear-gradient(135deg, #3498db, #8e44ad, #2ecc71);
+    }
+    33% {
+        background: linear-gradient(135deg, #2ecc71, #3498db, #8e44ad);
+    }
+    66% {
+        background: linear-gradient(135deg, #8e44ad, #2ecc71, #3498db);
+    }
+    100% {
+        background: linear-gradient(135deg, #3498db, #8e44ad, #2ecc71);
+    }
+}
+
+@keyframes ringRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Twinkling stars animation */
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.8; }
+}
+
+/* Add Earth rotation animation */
+@keyframes earthRotate {
+    0% { transform: translateX(0) rotate(0deg); }
+    100% { transform: translateX(0) rotate(360deg); }
+}
+
+/* Add Earth spin animation */
+@keyframes earthSpin {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 200% 0%; }
+}
+
+/* Add clouds drift animation */
+@keyframes cloudsDrift {
+    0% { transform: translateX(0) rotate(0deg); }
+    100% { transform: translateX(0) rotate(30deg); }
+}
+
+/* Responsive styles */
+@media screen and (max-width: 992px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 10% 5%;
+    }
+    
+    .hero-content, .hero-image {
+        width: 100%;
+    }
+    
+    .hero-image {
+        margin-top: 3rem;
+    }
+    
+    .features {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .feature {
+        width: 100%;
+        max-width: 400px;
+        margin-bottom: 2rem;
+    }
+    
+    .footer-section {
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .main-header {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    
+    .logo {
+        margin-bottom: 1rem;
+    }
+    
+    .main-nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .main-nav li {
+        margin: 0.5rem;
+    }
+}
