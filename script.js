@@ -299,8 +299,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Hide semester page
                     hideSemesterPage();
                 } else if (semester === '5') {
-                    // Open Google Drive folder in new tab for Semester 4
-                    window.open('https://drive.google.com/drive/folders/14P8qMZeHxcRz6Q0Qiy14XALTPZoyglXB?usp=drive_link', '_blank');
+                    // Open Google Drive folder in new tab for Semester 5
+                    window.open('https://drive.google.com/drive/folders/1ohrrkXWHW9x2ugQgp7aPGD-LcwW8BIYV?usp=sharing', '_blank');
                     
                     // Reset the buttons after selection
                     button.classList.remove('selected');
