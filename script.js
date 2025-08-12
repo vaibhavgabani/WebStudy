@@ -298,10 +298,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     // Hide semester page
                     hideSemesterPage();
-                } else if (semester === '5' || semester === '6') {
+                } else if (semester === '5') {
+                    // Open Google Drive folder in new tab for Semester 4
+                    window.open('https://drive.google.com/drive/folders/14P8qMZeHxcRz6Q0Qiy14XALTPZoyglXB?usp=drive_link', '_blank');
+                    
+                    // Reset the buttons after selection
+                    button.classList.remove('selected');
+                    const highlight = button.querySelector('.code-highlight');
+                    if (highlight) highlight.remove();
+                    allOtherButtons.forEach(btn => btn.style.opacity = '1');
+                    
+                    // Hide semester page
+                    hideSemesterPage();
+                } else if (semester === '6') {
                     // Navigate to the 404 page for semesters 5 and 6
                     window.location.href = '404.html';
-                    
+
                     // No need to reset or hide as we're navigating away
                 } else {
                     // Show alert for other semesters (as before)
