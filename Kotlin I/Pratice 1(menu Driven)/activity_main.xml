@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:layout_margin="30dp"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="694dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Name" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select DOJ" />
+
+            <DatePicker
+                android:id="@+id/doj"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select Dept" />
+
+            <Spinner
+                android:id="@+id/dept"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Submit" />
+
+
+            <Button
+                android:id="@+id/display"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Display" />
+
+            <Button
+                android:id="@+id/exp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="experiense more than 5 " />
+
+            <Button
+                android:id="@+id/maxExp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Max Experience" />
+
+
+            <Button
+                android:id="@+id/openActivity2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="open Activity 2" />
+
+            <ListView
+                android:id="@+id/outputList"
+                android:layout_width="match_parent"
+                android:layout_height="1214dp" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
