@@ -1,0 +1,96 @@
+package com.example.myapplication.database
+
+import android.content.Context
+import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteOpenHelper
+import android.widget.Toast
+
+class databasehelper (contesxt : Context) : SQLiteOpenHelper(contesxt,dbname,null,version) {
+    override fun onCreate(db: SQLiteDatabase?) {
+        var quary = "CREATE TABLE USER (${cal_email} TEXT PRIMARY KEY, ${cal_password} TEXT, ${cal_role} TEXT, ${cal_amount} INTEGER)";
+        db?.execSQL(quary);
+    }
+
+    override fun onUpgrade(
+        db: SQLiteDatabase?,
+        oldVersion: Int,
+        newVersion: Int
+    ) {
+        db?.execSQL("DROP TABLE IF EXISTS USER");
+    }
+
+    companion object{
+        public var dbname = "bank1";
+        public var version = 1;
+
+        public val cal_email = "email";
+        public val cal_password = "password";
+        public val cal_role = "role";
+        public val cal_amount = "amount";
+
+    }
+
+
+    fun insert_user(email : String , password : String , role : String , amount  : Int) : Boolean{
+        try {
+            var db = writableDatabase;
+            var quary = "INSERT INTO USER (${cal_email} , ${cal_password} , ${cal_role} , ${cal_amount}) VALUES ('$email','$password','$role','$amount')";
+            db.execSQL(quary);
+            return  true;
+        } catch(e : Exception){
+            return false;
+        }
+    }
+
+    fun display_user() : Cursor{
+        var db = readableDatabase;
+        var quary = "SELECT * FROM USER";
+        var cursor : Cursor = db.rawQuery(quary,null);
+        return cursor;
+    }
+
+    fun login_user(email : String , password : String) : Boolean{
+        var db = readableDatabase;
+        var quary = "SELECT * FROM USER WHERE ${cal_email} = '$email' AND ${cal_password} = '$password'";
+
+        var cursor : Cursor = db.rawQuery(quary,null);
+
+        if(cursor.count > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    fun get_user_data(email :String , password : String) : Cursor {
+        var db = readableDatabase;
+        var quary = "SELECT * FROM USER WHERE ${cal_email} = '$email' AND ${cal_password} = '$password'";
+        var cursor : Cursor = db.rawQuery(quary,null);
+        return cursor;
+    }
+
+
+    fun update_user(email : String , password : String , role : String , amount  : Int) : Boolean{
+        try {
+            var db = writableDatabase;
+            var quary = "UPDATE USER SET ${cal_email} = '$email' , ${cal_password} = '$password' , ${cal_amount} = '$amount' , ${cal_role} = '$role' WHERE ${cal_email} = '$email'";
+            db.execSQL(quary);
+            return true;
+        } catch (e : Exception){
+            return false;
+        }
+    }
+
+    fun delete_user(email : String): Boolean{
+        try {
+            var db = writableDatabase;
+            var quary = "DELETE FROM USER WHERE ${cal_email} = '$email'";
+            db.execSQL(quary);
+            return true;
+        } catch (e : Exception){
+            return false;
+        }
+    }
+}
