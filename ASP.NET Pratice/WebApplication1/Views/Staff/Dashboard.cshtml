@@ -1,0 +1,124 @@
+﻿@using System.Data
+@model DataTable
+
+@{
+    ViewData["Title"] = "Staff Dashboard";
+    string name = "", email = "", dept = "";
+    if (Model != null && Model.Rows.Count > 0)
+    {
+        name = Model.Rows[0]["FullName"].ToString();
+        email = Model.Rows[0]["Email"].ToString();
+        dept = Model.Rows[0]["Department"].ToString();
+    }
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+<div class="container mt-4">
+    <div class="row align-items-center mb-4">
+        <div class="col-md-7">
+            <h2 class="text-primary fw-bold mb-0">Staff Dashboard</h2>
+            <p class="text-muted"><i class="fas fa-building me-2"></i>@dept Management</p>
+        </div>
+        <div class="col-md-5">
+            <form asp-action="Dashboard" method="get" class="d-flex gap-2 justify-content-end">
+                <input type="date" name="searchDate" class="form-control w-auto shadow-sm" />
+                <button type="submit" class="btn btn-warning btn-sm fw-bold">Filter Lists</button>
+                <a asp-action="Dashboard" class="btn btn-outline-secondary btn-sm">Show All</a>
+            </form>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 border-top border-warning border-4">
+                <div class="card-header bg-white py-3 fw-bold">Staff Profile</div>
+                <div class="card-body">
+                    <p class="mb-1 small text-muted text-uppercase fw-bold">Full Name</p>
+                    <h6 class="fw-bold">@name</h6>
+                    <p class="mb-1 mt-3 small text-muted text-uppercase fw-bold">Email</p>
+                    <h6 class="text-truncate">@email</h6>
+                    <span class="badge bg-secondary mt-3">@dept</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-header bg-primary text-white py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="mb-0 fw-bold"><i class="fas fa-procedures me-2"></i>Patient Arrival Schedule</h6>
+                    <span class="badge bg-light text-dark">@ViewBag.SelectedDate</span>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-hover align-middle mb-0 small">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="ps-3">Patient</th>
+                                <th>Doctor</th>
+                                <th>Date/Time</th>
+                                <th class="text-center">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (ViewBag.PatientsOnDate != null && ((DataTable)ViewBag.PatientsOnDate).Rows.Count > 0)
+                            {
+                                foreach (DataRow row in ((DataTable)ViewBag.PatientsOnDate).Rows)
+                                {
+                                    <tr>
+                                        <td class="ps-3 fw-bold">@row["PatientName"]</td>
+                                        <td>Dr. @row["DoctorName"]</td>
+                                        <td>
+                                            <div class="fw-bold">@Convert.ToDateTime(row["AppointmentDate"]).ToString("dd MMM")</div>
+                                            <div class="text-muted small">@row["AppointmentTime"]</div>
+                                        </td>
+                                        <td class="text-center">
+                                            <span class="badge rounded-pill bg-warning text-dark">@row["Status"]</span>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr><td colspan="4" class="text-center py-5 text-muted">No patient records found.</td></tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-success text-white py-3">
+                    <h6 class="mb-0 fw-bold"><i class="fas fa-user-md me-2"></i>Scheduled Doctors</h6>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-hover align-middle mb-0 small">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="ps-3">Doctor Name</th>
+                                <th>Specialization</th>
+                                <th>Availability</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (ViewBag.DoctorsOnDate != null && ((DataTable)ViewBag.DoctorsOnDate).Rows.Count > 0)
+                            {
+                                foreach (DataRow row in ((DataTable)ViewBag.DoctorsOnDate).Rows)
+                                {
+                                    <tr>
+                                        <td class="ps-3 fw-bold">Dr. @row["FullName"]</td>
+                                        <td>@row["Specialization"]</td>
+                                        <td><span class="badge bg-soft-success text-success border">@row["Availability"]</span></td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr><td colspan="3" class="text-center py-4 text-muted">No scheduled doctors found.</td></tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

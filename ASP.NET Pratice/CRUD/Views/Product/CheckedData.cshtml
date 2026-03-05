@@ -1,0 +1,36 @@
+﻿@using System.Data;
+@{
+    int totalQty = 0;
+    if (ViewBag.SelectedProduct != null)
+    {
+        foreach (DataRow row in ViewBag.SelectedProduct)
+        {
+            totalQty += Convert.ToInt32(row["qty"]);
+        }
+    }
+}
+
+<h2>Selected Products Summary</h2>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Qty</th>
+    </tr>
+    @if (ViewBag.SelectedProduct != null)
+    {
+        foreach (DataRow row in ViewBag.SelectedProduct)
+        {
+            <partial name="_ProductView" model="row"></partial>
+            
+        }
+    }
+</table>
+
+<hr />
+<h3>Total Quantity: @totalQty</h3>
+<p>IDs processed: @ViewBag.CheckId</p>
+
+<a href="@Url.Action("Index", "Product")">Back to Product List</a>

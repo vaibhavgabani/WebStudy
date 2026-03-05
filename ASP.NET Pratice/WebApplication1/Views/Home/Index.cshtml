@@ -1,0 +1,147 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+<style>
+    /* Fixed Navigation Bar */
+    .navbar {
+        background: #0d47a1;
+        padding: 15px 0;
+    }
+
+    .hero-section {
+        background: linear-gradient(135deg, #0d47a1 0%, #1976d2 100%);
+        color: white;
+        padding: 100px 0 80px;
+        border-radius: 0 0 50px 50px;
+        margin-bottom: 50px;
+    }
+
+    .role-card {
+        border: none;
+        border-radius: 15px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        overflow: hidden;
+    }
+
+        .role-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+    .icon-box {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+    }
+
+    .bg-soft-blue {
+        background-color: #e3f2fd;
+        color: #1976d2;
+    }
+
+    .bg-soft-green {
+        background-color: #e8f5e9;
+        color: #2e7d32;
+    }
+
+    .bg-soft-orange {
+        background-color: #fff3e0;
+        color: #ef6c00;
+    }
+
+    .bg-soft-purple {
+        background-color: #f3e5f5;
+        color: #7b1fa2;
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow">
+    <div class="container">
+        <a class="navbar-brand fw-bold" asp-controller="Home" asp-action="Index">
+            <i class="fas fa-hand-holding-medical me-2"></i> Lotus Healthcare Portal
+        </a>
+        <div class="ms-auto d-flex align-items-center gap-3">
+            <a asp-controller="Admin" asp-action="ViewAllData" class="text-white text-decoration-none small fw-bold">
+                <i class="fas fa-database me-1"></i> Master Table
+            </a>
+            <a asp-controller="Account" asp-action="Logout" class="btn btn-outline-light btn-sm fw-bold px-3">
+                <i class="fas fa-sign-out-alt me-1"></i> Logout
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="hero-section text-center shadow">
+    <div class="container">
+        <h1 class="display-3 fw-bold mb-3 mt-4">Lotus Healthcare Portal</h1>
+        <p class="lead mb-4 px-md-5 opacity-90">A secure, integrated platform for patients to book appointments, doctors to manage schedules, and staff to maintain medical excellence.</p>
+        <div class="d-flex justify-content-center gap-3">
+            <a asp-controller="Account" asp-action="Login" class="btn btn-light btn-lg px-5 fw-bold text-primary shadow">
+                Login to Dashboard
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="container pb-5">
+    <div class="row g-4 text-center">
+        <div class="col-md-3">
+            <div class="card role-card h-100 shadow-sm border-top border-primary border-4">
+                <div class="card-body p-4">
+                    <div class="icon-box bg-soft-blue">
+                        <i class="fas fa-user-injured fa-2x"></i>
+                    </div>
+                    <h5 class="fw-bold">Patient Portal</h5>
+                    <p class="text-muted small">Update records and book appointments.</p>
+                    <a asp-controller="Patient" asp-action="Register" class="btn btn-outline-primary btn-sm w-100 mb-2">Register</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card role-card h-100 shadow-sm border-top border-success border-4">
+                <div class="card-body p-4">
+                    <div class="icon-box bg-soft-green">
+                        <i class="fas fa-user-md fa-2x"></i>
+                    </div>
+                    <h5 class="fw-bold">Doctor Panel</h5>
+                    <p class="text-muted small">Manage rounds and patient lists date-wise.</p>
+                    <a asp-controller="Doctor" asp-action="Register" class="btn btn-outline-success btn-sm w-100 mb-2">Register</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card role-card h-100 shadow-sm border-top border-warning border-4">
+                <div class="card-body p-4">
+                    <div class="icon-box bg-soft-orange">
+                        <i class="fas fa-user-shield fa-2x"></i>
+                    </div>
+                    <h5 class="fw-bold">Medical Staff</h5>
+                    <p class="text-muted small">Manage arrivals and daily hospital operations.</p>
+                    <a asp-controller="Staff" asp-action="Register" class="btn btn-outline-warning btn-sm w-100 mb-2">Register</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card role-card h-100 shadow-sm border-top border-dark border-4">
+                <div class="card-body p-4">
+                    <div class="icon-box bg-soft-purple">
+                        <i class="fas fa-table fa-2x"></i>
+                    </div>
+                    <h5 class="fw-bold">Master Table</h5>
+                    <p class="text-muted small">View all raw records across the entire database system.</p>
+                    <a asp-controller="Admin" asp-action="ViewAllData" class="btn btn-dark btn-sm w-100 mb-2">Master Database</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

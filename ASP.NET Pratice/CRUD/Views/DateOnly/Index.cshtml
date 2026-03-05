@@ -1,0 +1,20 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+    <head><title></title></head>
+    <body>
+    <form asp-action="SaveDate" method="post">
+        <div>
+            <label>Select Date:</label>
+            <input type="date" name="date" class="form-control" />
+        </div>
+
+        <div style="margin-top:10px;">
+            <label>Select Date and Time:</label>
+            <input type="datetime-local" name="datewithtime" class="form-control" />
+        </div>
+
+        <div style="margin-top:10px;">
+            <button type="submit">Submit Data</button>
+        </div>
+    </form>
+    </body>
+</html>

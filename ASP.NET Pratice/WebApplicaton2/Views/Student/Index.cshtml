@@ -1,0 +1,26 @@
+﻿@model List<WebApplication1.Models.Student>
+
+<h2>Student List</h2>
+<table border="1" cellpadding="5" cellspacing="0">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Email</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var student in Model)
+    {
+        <tr>
+            <td>@student.id</td>
+            <td>@student.name</td>
+            <td>@student.age</td>
+            <td>@student.email</td>
+            <td>
+                <a href="@Url.Action("Edit", "Student", new { id = student.id })">Edit</a> |
+                <a href="@Url.Action("Delete", "Student", new { id = student.id })">Delete</a>
+            </td>
+        </tr>
+    }
+</table>
+<a href="@Url.Action("Create", "Student")">Add New Student</a>

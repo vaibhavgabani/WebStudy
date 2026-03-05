@@ -1,0 +1,59 @@
+﻿@model dynamic
+
+@{
+    ViewData["Title"] = "Staff Registration";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5 border p-4 shadow-sm bg-light rounded">
+            <h2 class="text-center text-warning mb-4">Staff Registration</h2>
+            <hr />
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger text-center">
+                    @ViewBag.Error
+                </div>
+            }
+
+            <form asp-action="Register" method="post">
+                <div class="mb-3">
+                    <label class="form-label font-weight-bold">Full Name</label>
+                    <input name="FullName" type="text" class="form-control" placeholder="Enter full name" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label font-weight-bold">Email Address</label>
+                    <input name="Email" type="email" class="form-control" placeholder="staff@hospital.com" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label font-weight-bold">Password</label>
+                    <input name="Password" type="password" class="form-control" placeholder="Choose a password" required minlength="6" />
+                </div>
+
+                <hr />
+
+                <div class="mb-4">
+                    <label class="form-label font-weight-bold">Department</label>
+                    <select name="Department" class="form-select border-primary" required>
+                        <option value="" selected disabled>-- Select Hospital Department --</option>
+                        <option value="Cardiology">Cardiology</option>
+                        <option value="Neurology">Neurology</option>
+                        <option value="Pediatrics">Pediatrics</option>
+                        <option value="Emergency">Emergency Room</option>
+                        <option value="Pharmacy Management">Pharmacy Management</option>
+                        <option value="Security Management">Security Management</option>
+                        <option value="Administration">Hospital Administration</option>
+                    </select>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-warning text-dark font-weight-bold">Register Staff Member</button>
+                    <a href="/" class="btn btn-outline-secondary btn-sm mt-2">Cancel and Go Home</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

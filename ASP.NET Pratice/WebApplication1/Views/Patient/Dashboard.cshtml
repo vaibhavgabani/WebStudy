@@ -1,0 +1,218 @@
+﻿@using System.Data
+@model DataTable
+
+@{
+    ViewData["Title"] = "Patient Dashboard";
+
+    // Extract data from the Patient Model
+    string name = "", email = "", dob = "", records = "", contact = "";
+
+    if (Model != null && Model.Rows.Count > 0)
+    {
+        name = Model.Rows[0]["FullName"].ToString();
+        email = Model.Rows[0]["Email"].ToString();
+        dob = Convert.ToDateTime(Model.Rows[0]["DateOfBirth"]).ToString("dd MMM yyyy");
+        records = Model.Rows[0]["PastRecords"].ToString();
+        contact = Model.Rows[0]["ContactInfo"].ToString();
+    }
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-primary fw-bold">Welcome, @name</h2>
+            <p class="text-muted">Patient Portal | Hospital Management System</p>
+            <hr />
+
+            @* Alerts for Booking or Updates *@
+            @if (TempData["Message"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show shadow-sm border-0">
+                    <i class="fas fa-check-circle me-2"></i> @TempData["Message"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show shadow-sm border-0">
+                    <i class="fas fa-exclamation-triangle me-2"></i> @TempData["Error"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div id="viewProfileCard" class="card shadow-sm mb-4 border-0">
+                <div class="card-header bg-primary text-white fw-bold">
+                    <h5 class="mb-0">Medical Profile & Records</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Email:</strong> @email</p>
+                    <p><strong>Date of Birth:</strong> @dob</p>
+                    <p><strong>Contact:</strong> @contact</p>
+                    <hr />
+                    <h6>Past Medical Records:</h6>
+                    <p class="text-secondary small">@records</p>
+                    <button class="btn btn-outline-primary btn-sm w-100 mt-2" onclick="toggleEdit()">Update Profile</button>
+                </div>
+            </div>
+
+            <div id="editProfileCard" class="card shadow-sm mb-4 border-0" style="display:none;">
+                <div class="card-header bg-warning text-dark fw-bold">
+                    <h5 class="mb-0">Update Information</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="UpdateProfile" method="post">
+                        <div class="mb-2">
+                            <label class="small">Full Name</label>
+                            <input name="FullName" class="form-control form-control-sm" value="@name" required />
+                        </div>
+                        <div class="mb-2">
+                            <label class="small">Email</label>
+                            <input name="Email" type="email" class="form-control form-control-sm" value="@email" required />
+                        </div>
+                        <div class="mb-2">
+                            <label class="small">Contact Info</label>
+                            <input name="ContactInfo" class="form-control form-control-sm" value="@contact" required />
+                        </div>
+                        <div class="mb-2">
+                            <label class="small">Past Records</label>
+                            <textarea name="PastRecords" class="form-control form-control-sm" rows="3">@records</textarea>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success btn-sm">Save Changes</button>
+                            <button type="button" class="btn btn-light btn-sm" onclick="toggleEdit()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card shadow-sm mb-4 border-info">
+                <div class="card-header bg-info text-white fw-bold">
+                    <h5 class="mb-0">Available Doctors & Schedules</h5>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Doctor Name</th>
+                                <th>Specialization</th>
+                                <th>Availability</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (ViewBag.DoctorsList != null)
+                            {
+                                foreach (DataRow doc in ((DataTable)ViewBag.DoctorsList).Rows)
+                                {
+                                    <tr>
+                                        <td><strong>Dr. @doc["FullName"]</strong></td>
+                                        <td>@doc["Specialization"]</td>
+                                        <td><span class="badge bg-success">@doc["Availability"]</span></td>
+                                        <td class="text-center">
+                                            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#bookModal@(doc["DoctorId"])">
+                                                Book Now
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                    <div class="modal fade" id="bookModal@(doc["DoctorId"])" tabindex="-1">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content border-0 shadow-lg">
+                                                <form asp-action="BookAppointment" method="post">
+                                                    <input type="hidden" name="DoctorId" value="@doc["DoctorId"]" />
+                                                    <div class="modal-header bg-primary text-white">
+                                                        <h5 class="modal-title">Schedule with Dr. @doc["FullName"]</h5>
+                                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p class="small text-muted mb-3">Timing: @doc["Availability"]</p>
+                                                        <div class="mb-3">
+                                                            <label class="form-label fw-bold">Select Appointment Date</label>
+                                                            <input type="date" name="AppDate" class="form-control" required min="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label fw-bold">Select Preferred Time</label>
+                                                            <input type="time" name="AppTime" class="form-control" required />
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer bg-light">
+                                                        <button type="submit" class="btn btn-primary w-100 fw-bold">Confirm Booking</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card shadow-sm border-0 mt-4">
+                <div class="card-header bg-dark text-white fw-bold">
+                    <h5 class="mb-0"><i class="fas fa-calendar-check me-2"></i>My Booked Appointments</h5>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Doctor Name</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th class="text-center">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (ViewBag.MyAppointments != null && ((DataTable)ViewBag.MyAppointments).Rows.Count > 0)
+                            {
+                                foreach (DataRow app in ((DataTable)ViewBag.MyAppointments).Rows)
+                                {
+                                    <tr>
+                                        <td><strong>Dr. @app["DoctorName"]</strong></td>
+                                        <td>@Convert.ToDateTime(app["AppointmentDate"]).ToString("dd MMM yyyy")</td>
+                                        <td><span class="badge bg-light text-dark border">@app["AppointmentTime"]</span></td>
+                                        <td class="text-center">
+                                            <span class="badge rounded-pill bg-warning text-dark px-3">@app["Status"]</span>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="4" class="text-center py-5 text-muted">
+                                        <i class="fas fa-calendar-times fa-2x mb-2 d-block opacity-25"></i>
+                                        No upcoming appointments found.
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleEdit() {
+        var view = document.getElementById("viewProfileCard");
+        var edit = document.getElementById("editProfileCard");
+        if (view.style.display === "none") {
+            view.style.display = "block";
+            edit.style.display = "none";
+        } else {
+            view.style.display = "none";
+            edit.style.display = "block";
+        }
+    }
+</script>

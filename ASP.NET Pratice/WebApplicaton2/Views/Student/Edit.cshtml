@@ -1,0 +1,26 @@
+﻿@model WebApplication1.Models.Student
+
+<h2>Edit Student</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="id" />
+
+    <div>
+        <label>Name:</label>
+        <input asp-for="name" />
+    </div>
+
+    <div>
+        <label>Age:</label>
+        <input asp-for="age" type="number" />
+    </div>
+
+    <div>
+        <label>Email:</label>
+        <input asp-for="email" type="email" />
+    </div>
+
+    <button type="submit">Update</button>
+</form>
+    
+<a href="@Url.Action("Index", "Student")">Back to List</a>

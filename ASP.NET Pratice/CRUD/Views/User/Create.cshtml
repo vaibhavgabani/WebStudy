@@ -1,0 +1,25 @@
+﻿@model CRUD.Models.UserTB;
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head><title>Create New User</title></head>
+    <body>
+    <h1>Create New User</h1>
+    <form asp-action="Create" method="post">
+        <div>
+            <label>Name : </label>
+            <input type="text" name="name" value="" />
+            <span asp-validation-for="name" style="color:red" ></span>
+        </div>
+        <div>
+            <label>Email : </label>
+            <input type="text" name="email" value="" />
+            <span asp-validation-for="email" style="color:red"></span>
+        </div>
+        <div>
+            <label>Password : </label>
+            <input type="text" name="password" value="" />
+            <span asp-validation-for="password" style="color:red"></span>
+        </div>
+        <input type="submit" name="name" value="Submit" />
+    </form>
+    </body>
+</html>

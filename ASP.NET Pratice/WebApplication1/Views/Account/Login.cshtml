@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Hospital Portal Login";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4 shadow p-4 bg-white rounded border-top border-primary border-4">
+            <h2 class="text-center mb-4">Portal Login</h2>
+            <p class="text-center text-muted small">Enter your credentials to access your dashboard</p>
+            <hr />
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger text-center py-2">
+                    @ViewBag.Error
+                </div>
+            }
+
+            <form asp-action="Login" method="post">
+                <div class="mb-3">
+                    <label class="form-label font-weight-bold">Email Address</label>
+                    <input name="Email" type="email" class="form-control" placeholder="name@hospital.com" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label font-weight-bold">Password</label>
+                    <input name="Password" type="password" class="form-control" placeholder="••••••••" required />
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary shadow-sm">Sign In</button>
+                </div>
+            </form>
+
+            <div class="mt-4 text-center border-top pt-3">
+                <p class="text-muted small mb-0">New Patient? <a href="/Patient/Register" class="text-decoration-none">Register here</a></p>
+            </div>
+        </div>
+    </div>
+</div>

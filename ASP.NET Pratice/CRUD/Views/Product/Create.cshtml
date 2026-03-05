@@ -1,0 +1,29 @@
+﻿@model CRUD.Models.ProductTB;
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head><title></title></head>
+    <body>
+    <h1>@ViewBag.message</h1>
+        <form asp-action="Create" method="post">
+            <div>
+                <label>Enter Name</label>
+                <input type="text" name="name" value="" />
+                <span asp-validation-for="name"></span>
+            </div>
+            <div>
+                <label>Enter Price</label>
+                <input type="number" name="price" value="" />
+                <span asp-validation-for="price"></span>
+            </div>
+            <div>
+                <label>Enter Name</label>
+                <input type="number" name="qty" value="" />
+                <span asp-validation-for="qty"></span>
+            </div>
+            <div>
+            <input type="submit" name="submit" value="submit" />
+            </div>
+        </form>
+
+    </body>
+</html>

@@ -1,0 +1,44 @@
+﻿@using System.Data;
+@model DataTable;
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head><title>View All User</title></head>
+    <body>
+    <h1>This is Email from @ViewBag.EmailFromSession</h1>
+        <div>
+        <a href="/User/Create">Create New User</a>
+        </div>
+        <table>
+    <tr>
+        <td>id</td>
+            <td>name</td>
+            <td>email</td>
+            <td>password</td>
+            <td>Delete</td>
+    </tr>
+        @foreach (DataRow row in ViewBag.UsersFromIndex)
+            {
+            <tr>
+                <td>@row["id"]</td>
+                <td>@row["name"]</td>
+                <td>@row["email"]</td>
+                <td>@row["password"]</td>
+                <td><a href="@Url.Action("Edit","User", new {id = row["id"]})">Edit</a></td>
+                <td><a href="@Url.Action("Delete","User", new {id = row["id"]})">Delete</a></td>
+
+            </tr>
+            }
+        </table>
+        <div>
+            <h1>This is call from parshal View</h1>
+            <table>
+                <tbody>
+                    @foreach (DataRow row in ViewBag.UsersFromIndex)
+                    {
+                        @* Call the partial view INSIDE the loop for every user *@
+                        <partial name="_UserRow" model="row" />
+                    }
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

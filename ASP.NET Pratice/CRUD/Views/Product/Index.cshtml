@@ -1,0 +1,52 @@
+﻿@using System.Data;
+@{
+    int totalQty = 0;
+    if (ViewBag.SelectedProduct != null)
+    {
+        
+        @foreach (DataRow row in ViewBag.SelectedProduct)
+        {
+            totalQty = totalQty + Convert.ToInt32(@row["qty"]);
+        }
+    
+    }
+
+}
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head><title></title></head>
+    <body>
+        <form asp-action="CheckedData" method="post">
+            <button type="submit">Submit</button>
+            <table>
+                <tr>
+                    <td>select</td>
+                    <td>id</td>
+                    <td>name</td>
+                    <td>price</td>
+                    <td>qty</td>
+                    <td>Edit</td>
+                    <td>Delete</td>
+                </tr>
+                @foreach (DataRow row in ViewBag.ProdcutTable)
+                {
+                    <tr>
+                        <td><input type="checkbox" name="selectedId" value="@row["id"]" /></td>
+                        <td>@row["id"]</td>
+                        <td>@row["name"]</td>
+                        <td>@row["price"]</td>
+                        <td>@row["qty"]</td>
+                        <td><a href="@Url.Action("Edit", "Product", new { id = row["id"] })">Edit</a></td>
+                        <td><a href="@Url.Action("Delete", "Product", new { id = row["id"] })">Delete</a></td>
+                    </tr>
+                }
+            </table>
+            <h2>
+            @totalQty
+            </h2>
+        </form>
+        
+        
+<h3>Select is id : @ViewBag.id</h3>
+    <h3>Checked is id : @ViewBag.CheckId</h3>
+    </body>
+</html>

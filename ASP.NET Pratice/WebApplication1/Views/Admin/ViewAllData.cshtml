@@ -1,0 +1,77 @@
+﻿@using System.Data
+@model Tuple<DataTable, DataTable, DataTable, DataTable>
+
+@{
+    ViewData["Title"] = "Database Master View";
+
+    // This local function replaces the broken @helper syntax
+    void RenderTable(DataTable dt, string cssClass)
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped @cssClass">
+                <thead class="table-dark">
+                    <tr>
+                        @foreach (DataColumn col in dt.Columns)
+                        {
+                            <th>@col.ColumnName</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (dt != null && dt.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            <tr>
+                                @foreach (var cell in row.ItemArray)
+                                {
+                                    <td>@cell</td>
+                                }
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="100%" class="text-center">No data found in this table.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+}
+
+<div class="container-fluid mt-4">
+    <h2 class="text-center mb-4">Master Database Explorer</h2>
+
+    <ul class="nav nav-tabs" id="dbTabs" role="tablist">
+        <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#users">UserTable</a></li>
+        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#doctors">DoctorTable</a></li>
+        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#patients">PatientTable</a></li>
+        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#staff">StaffTable</a></li>
+    </ul>
+
+    <div class="tab-content mt-3">
+        <div class="tab-pane fade show active" id="users">
+            @{
+                RenderTable(Model.Item1, "table-primary");
+            }
+        </div>
+        <div class="tab-pane fade" id="doctors">
+            @{
+                RenderTable(Model.Item2, "table-success");
+            }
+        </div>
+        <div class="tab-pane fade" id="patients">
+            @{
+                RenderTable(Model.Item3, "table-info");
+            }
+        </div>
+        <div class="tab-pane fade" id="staff">
+            @{
+                RenderTable(Model.Item4, "table-warning");
+            }
+        </div>
+    </div>
+</div>
