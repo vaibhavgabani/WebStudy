@@ -1,0 +1,26 @@
+﻿@using System.Data
+@{
+    DataRow bill = (DataRow)ViewBag.billData;
+}
+
+<html>
+<body>
+    <h2>Booking Invoice</h2>
+    <hr />
+    @if (bill != null)
+    {
+        <div>
+            <p><strong>Booking ID:</strong> @bill["id"]</p>
+            <p><strong>Customer Name:</strong> @bill["Customer_Name"]</p>
+            <p><strong>Tour Package:</strong> @bill["Tour_Name"]</p>
+            <p><strong>Destination:</strong> @bill["Destination"]</p>
+            <p><strong>Total Persons:</strong> @bill["Total_Person"]</p>
+            <p><strong>Amount Paid:</strong> ₹@bill["Total_Amount"]</p>
+            <p><strong>Booking Date:</strong> @bill["Booking_Date"]</p>
+        </div>
+    }
+    <br />
+    <button onclick="window.print()">Print Bill</button>
+    <a href="@Url.Action("Index")">Back to Home</a>
+</body>
+</html>

@@ -1,0 +1,62 @@
+﻿@using System.Data;
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Tour & User Info</title>
+</head>
+<body>
+    <h3>Welcome !! @ViewBag.email</h3>
+
+    <h4>Available Tours</h4>
+    <table border="1">
+        <tr>
+            <td>id</td>
+            <td>Tour Name</td>
+            <td>Destination</td>
+            <td>Price</td>
+            <td>Book</td>
+        </tr>
+        @foreach (DataRow rows in ViewBag.table)
+        {
+            <tr>
+                <td>@rows["id"]</td>
+                <td>@rows["Tour_Name"]</td>
+                <td>@rows["Destination"]</td>
+                <td>@rows["Price"]</td>
+                <td><a href="@Url.Action("Book", "Customer", new { tid = rows["id"] })">Book</a></td>
+            </tr>
+        }
+    </table>
+
+    <hr />
+
+    <h4>User Details (From table2)</h4>
+    <table border="1">
+        <tr>
+            <td>User ID</td>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Age</td>
+        </tr>
+        @if (ViewBag.table2 != null)
+        {
+            @foreach (DataRow user in ViewBag.table2)
+            {
+                <tr>
+                    <td>@user["id"]</td>
+                    <td>@user["Customer_Name"]</td>
+                    <td>@user["Email_Id"]</td>
+                    <td>@user["Age"]</td>
+                </tr>
+            }
+        }
+    </table>
+
+    <br />
+    <form asp-action="Search" method="post">
+        <div>Search Duration: </div>
+        <input type="number" name="number" />
+        <input type="submit" value="Submit Search" />
+    </form>
+    <h3>Your Search: @ViewBag.yourSearch</h3>
+</body>
+</html>

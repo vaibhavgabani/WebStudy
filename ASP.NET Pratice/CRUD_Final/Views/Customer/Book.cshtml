@@ -1,0 +1,33 @@
+﻿@using System.Data
+@{
+    DataRow tour = (DataRow)ViewBag.tourData;
+}
+
+<html>
+<head>
+    <title>Booking</title>
+</head>
+<body>
+    <h2>Confirm Booking</h2>
+
+    @if (tour != null)
+    {
+        <div>
+            <p><strong>Tour:</strong> @tour["Tour_Name"]</p>
+            <p><strong>To:</strong> @tour["Destination"]</p>
+            <p><strong>Days:</strong> @tour["DurationInDays"]</p>
+            <p><strong>Price:</strong> @tour["Price"]</p>
+        </div>
+
+        <form asp-action="ConfirmBooking" method="post">
+            <input type="hidden" name="Tour_Id" value="@tour["id"]" />
+            <input type="hidden" name="Customer_Id" value="@Context.Session.GetString("userid")" />
+
+            <label>Persons:</label>
+            <input type="number" name="Total_Person" required />
+
+            <button type="submit">Book Now</button>
+        </form>
+    }
+</body>
+</html>

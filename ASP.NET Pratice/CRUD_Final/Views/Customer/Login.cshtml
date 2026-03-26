@@ -1,0 +1,20 @@
+﻿@model CRUD_Final.Models.CustomerTB;
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head><title>Customer Login</title></head>
+    <body>
+        <form asp-action="Login" method="post">
+            <div>
+                <label>Email : </label>
+            <input type="email" name="Email_id" value="" />
+            <span asp-validation-for="Email_id"></span>
+            </div>
+            <div>
+                <label>Password : </label>
+            <input type="Password" name="Password" value="" />
+            <span asp-validation-for="Password"></span>
+            </div>
+        <input type="submit" name="submit" value="submit" />
+        </form>
+        <h3>@ViewBag.message</h3>
+    </body>
+</html>
