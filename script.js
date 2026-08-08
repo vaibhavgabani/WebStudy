@@ -237,6 +237,12 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', () => {
             const semester = button.getAttribute('data-semester');
             const url = button.getAttribute('data-url');
+            const cleanupSelection = () => {
+                button.classList.remove('selected');
+                const highlight = button.querySelector('.code-highlight');
+                if (highlight) highlight.remove();
+                [...semesterButtons].filter(btn => btn !== button).forEach(btn => btn.style.opacity = '1');
+            };
             
             // Create a "selection" animation effect
             button.classList.add('selected');
@@ -247,6 +253,13 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Code highlight animation effect
             button.innerHTML += "<div class='code-highlight'></div>";
+
+            if (url) {
+                window.open(url, '_blank');
+                cleanupSelection();
+                hideSemesterPage();
+                return;
+            }
             
             // Small delay for visual feedback before taking action
             setTimeout(() => {
@@ -254,11 +267,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Open Google Drive folder in new tab for Semester 1
                     window.open('https://drive.google.com/drive/u/1/folders/1--YFnLwuq1icWniJ_af7GoSlO9it_g4k', '_blank');
                     
-                    // Reset the buttons after selection
-                    button.classList.remove('selected');
-                    const highlight = button.querySelector('.code-highlight');
-                    if (highlight) highlight.remove();
-                    allOtherButtons.forEach(btn => btn.style.opacity = '1');
+                    cleanupSelection();
                     
                     // Hide semester page
                     hideSemesterPage();
@@ -266,11 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Open Google Drive folder in new tab for Semester 2
                     window.open('https://drive.google.com/drive/folders/1_TUy8f7ckFV0pCmfF__4icAoVLzWRedu?usp=drive_link', '_blank');
                     
-                    // Reset the buttons after selection
-                    button.classList.remove('selected');
-                    const highlight = button.querySelector('.code-highlight');
-                    if (highlight) highlight.remove();
-                    allOtherButtons.forEach(btn => btn.style.opacity = '1');
+                    cleanupSelection();
                     
                     // Hide semester page
                     hideSemesterPage();
@@ -278,11 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Open Google Drive folder in new tab for Semester 3
                     window.open('https://drive.google.com/drive/folders/1MglRglAiOq8xfIrClq_DQlfc6pKzrEM3?usp=drive_link', '_blank');
                     
-                    // Reset the buttons after selection
-                    button.classList.remove('selected');
-                    const highlight = button.querySelector('.code-highlight');
-                    if (highlight) highlight.remove();
-                    allOtherButtons.forEach(btn => btn.style.opacity = '1');
+                    cleanupSelection();
                     
                     // Hide semester page
                     hideSemesterPage();
@@ -290,45 +291,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Open Google Drive folder in new tab for Semester 4
                     window.open('https://drive.google.com/drive/folders/14P8qMZeHxcRz6Q0Qiy14XALTPZoyglXB?usp=drive_link', '_blank');
                     
-                    // Reset the buttons after selection
-                    button.classList.remove('selected');
-                    const highlight = button.querySelector('.code-highlight');
-                    if (highlight) highlight.remove();
-                    allOtherButtons.forEach(btn => btn.style.opacity = '1');
+                    cleanupSelection();
                     
                     // Hide semester page
                     hideSemesterPage();
                 } else if (semester === '5') {
-                    // Open Google Drive folder in new tab for Semester 5
-                    window.open('https://drive.google.com/drive/folders/1AThvXUsZM8Mxq92AGnhXFdOMfUQsyzN2?usp=drive_link', '_blank');
-                    
-                    // Reset the buttons after selection
-                    button.classList.remove('selected');
-                    const highlight = button.querySelector('.code-highlight');
-                    if (highlight) highlight.remove();
-                    allOtherButtons.forEach(btn => btn.style.opacity = '1');
-                    
-                    // Hide semester page
+                    cleanupSelection();
                     hideSemesterPage();
                 } else if (semester === '6') {
-                    // Open Google Drive folder in new tab for Semester 6
-                    window.open('https://drive.google.com/drive/folders/1fuTZ-tyzbMfhQY5DtS6DTzc7SO6vvIIa?usp=drive_link', '_blank');
-
-                    // No need to reset or hide as we're navigating away
+                    cleanupSelection();
+                    hideSemesterPage();
                 } else if (semester === '7') {
-                    // Open Google Drive folder in new tab for Semester 7
-                    window.open('https://drive.google.com/drive/folders/1OtL9MrFLp5JwN_wzUI-g64dmWa0CHhlP?usp=drive_link', '_blank');
-
-                    // No need to reset or hide as we're navigating away
+                    cleanupSelection();
+                    hideSemesterPage();
                 } else {
                     // Show alert for other semesters (as before)
                     alert(`You selected Semester ${semester}. Content for this semester will be loaded.`);
                     
-                    // Reset the buttons after selection
-                    button.classList.remove('selected');
-                    const highlight = button.querySelector('.code-highlight');
-                    if (highlight) highlight.remove();
-                    allOtherButtons.forEach(btn => btn.style.opacity = '1');
+                    cleanupSelection();
                     
                     // Here you would typically redirect to a semester-specific page
                     // For now we'll just hide the semester page
