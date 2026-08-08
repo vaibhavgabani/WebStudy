@@ -299,8 +299,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Hide semester page
                     hideSemesterPage();
                 } else if (semester === '5') {
-                        // Open Google Drive folder in new tab for Semester 5
-                        window.open('https://drive.google.com/drive/folders/1ohrrkXWHW9x2ugQgp7aPGD-LcwW8BIYV', '_blank');
+                    // Open Google Drive folder in new tab for Semester 5
+                    window.open('https://drive.google.com/drive/folders/1AThvXUsZM8Mxq92AGnhXFdOMfUQsyzN2?usp=drive_link', '_blank');
                     
                     // Reset the buttons after selection
                     button.classList.remove('selected');
@@ -312,7 +312,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     hideSemesterPage();
                 } else if (semester === '6') {
                     // Open Google Drive folder in new tab for Semester 6
-                    window.open('https://drive.google.com/drive/folders/19E4MQhs-_O3IWYuuoJt0b9vPP8tiHswW?usp=drive_link', '_blank');
+                    window.open('https://drive.google.com/drive/folders/1fuTZ-tyzbMfhQY5DtS6DTzc7SO6vvIIa?usp=drive_link', '_blank');
+
+                    // No need to reset or hide as we're navigating away
+                } else if (semester === '7') {
+                    // Open Google Drive folder in new tab for Semester 7
+                    window.open('https://drive.google.com/drive/folders/1OtL9MrFLp5JwN_wzUI-g64dmWa0CHhlP?usp=drive_link', '_blank');
 
                     // No need to reset or hide as we're navigating away
                 } else {
