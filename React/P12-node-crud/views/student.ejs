@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student List</title>
+</head>
+<body>
+    <form method="post" action="/student">
+        rollno : <input type="number" name="rollno" id="">
+        <% if(errorData && errorData.find(e=>e.path === "rollno")) {%>
+            <%= errorData.find(e=> e.path === "rollno").msg %>
+        <% } %>
+        <br/>
+
+        name : <input type="text" name="name" id="">
+        <% if(errorData && errorData.find(e=> e.path ==="name")) {%>
+            <%= errorData.find(e=> e.path ==="name").msg %>
+        <% } %>
+
+        <br/>
+        <input type="submit" value="submit">
+    </form>
+
+    <h2>All Students</h2>
+    <div>
+        <% if (data && data.length > 0) { %>
+            <ul>
+                <% data.forEach(student => { %>
+                    <li><strong>Roll No:</strong> <%= student.rollno %> | <strong>Name:</strong> <%= student.name %></li>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <p>No students found.</p>
+        <% } %>
+    </div>
+</body>
+</html>

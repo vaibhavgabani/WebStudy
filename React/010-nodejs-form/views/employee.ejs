@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Hellow from exployee
+    <form method="post" action="/employee" enctype="multipart/form-data">
+        id : <input type="number" name="_id" id=""><br/>
+        <span>
+            <% if(error && error.find((e)=> e.path === "_id")) {%>
+            <%= error.find((e)=> e.path === "_id").msg %>
+            <% } %>
+        </span>
+
+        name : <input type="text" name="_name" id=""><br/>
+        email : <input type="email" name="_email" id=""><br/>
+        file : <input type="file" name="_photo" id=""><br/>
+        <input type="submit" value="Submit">
+    </form>
+    <div>
+        Entered Data:
+        <% if(locals.employeeData) {%>
+            <%= employeeData._id %>
+            <%= employeeData._name %>
+            <%= employeeData._email %>
+            <%= employeeData._photo %>
+            <% } %>
+    </div>
+    
+</body>
+</html>

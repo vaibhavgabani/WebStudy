@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Hellow Student
+    <form method="post" action="/student">
+        id : <input type="number" name="_id" id=""><br/>
+        name : <input type="text" name="_name" id=""><br/>
+        email : <input type="email" name="_email" id=""><br/>
+        password : <input type="password" name="_password" id=""><br/>
+        File : <input type="file" name="photo" id="">
+        <input type="submit" value="Submit">
+    </form>
+    <div>
+        <%if(locals.studentData){%>
+            <%=studentData._id%>
+            <%=studentData._name%>
+            <%=studentData._email%>
+            <%=studentData._password%>
+        <%}%>
+    </div>
+    <div>
+        Errors:
+         <% if(errors && errors.find(e => e.path === "_id")) { %>
+                <%= errors.find(e => e.path === "_id").msg %>
+            <% } %>
+        <br/>
+        <% if(errors && errors.find(e => e.path === "_email")) { %>
+            <%= errors.find(e => e.path === "_email").msg %>
+            <% } %>
+    </div>
+</body>
+</html>
