@@ -646,6 +646,12 @@ document.addEventListener('DOMContentLoaded', () => {
             case 6:
                 folderIcon.style.color = '#1abc9c'; // Teal
                 break;
+            case 7:
+                folderIcon.style.color = '#9b59b6'; // Purple (same as Semester 3)
+                break;
+            case 8:
+                folderIcon.style.color = '#1abc9c'; // Teal (same as Semester 6)
+                break;
         }
         
         // Add 3D transform on hover
